@@ -28,7 +28,7 @@ def fetch_usdaf_price(search_width: str = "4h"):
 def fetch_usdaf_supply():
     w3 = Web3(HTTPProvider(MAINNET_HTTP_RPC_URL))
     usdaf_contract = w3.eth.contract(
-        address="0x85E30b8b263bC64d94b827ed450F2EdFEE8579dA",
+        address="0x9Cf12ccd6020b6888e4D4C4e4c7AcA33c1eB91f8",
         abi="""[{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}]""",
     )
     supply = usdaf_contract.functions.totalSupply().call() / 10**18
