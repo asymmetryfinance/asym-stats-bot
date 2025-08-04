@@ -42,21 +42,17 @@ def fetch_curve_pool_tvl():
 
 
 def fetch_usdaf_tvl():
-    """Fetch total USDaf TVL from DeFiLlama + Curve pool"""
+    """Fetch USDaf TVL from DeFiLlama only (excluding Curve pool)"""
     try:
         # Get main TVL from DeFiLlama
         res = httpx.get("https://api.llama.fi/tvl/asymmetry-usdaf")
         main_tvl = res.json()
         
-        # Get Curve pool TVL (half value to avoid double counting)
-        curve_tvl = fetch_curve_pool_tvl()
-        
-        # Return combined TVL
-        total_tvl = main_tvl + curve_tvl
-        return total_tvl
+        # Return only the main TVL (excluding Curve pool)
+        return main_tvl
     except Exception:
-        # Fallback to just Curve pool if main TVL fails
-        return fetch_curve_pool_tvl()
+        # Return 0 if main TVL fails (no longer falling back to Curve pool)
+        return 0
 
 
 async def send_update(bot: hikari.GatewayBot):
