@@ -17,11 +17,11 @@ MAINNET_HTTP_RPC_URL = os.getenv("MAINNET_HTTP_RPC_URL")
 
 
 def fetch_usdaf_price(search_width: str = "4h"):
-    # Fetch USDaf price from Defillama API
+    # Fetch USDaf price from DeFiLlama API using contract address format
     res = httpx.get(
-        f"https://coins.llama.fi/prices/current/coingecko:asymmetry-usdaf?searchWidth={search_width}"
+        f"https://coins.llama.fi/prices/current/ethereum:0x9Cf12ccd6020b6888e4D4C4e4c7AcA33c1eB91f8?searchWidth={search_width}"
     )
-    price = res.json()["coins"]["coingecko:asymmetry-usdaf"]["price"]
+    price = res.json()["coins"]["ethereum:0x9Cf12ccd6020b6888e4D4C4e4c7AcA33c1eB91f8"]["price"]
     return f"${price:.2f}"
 
 
