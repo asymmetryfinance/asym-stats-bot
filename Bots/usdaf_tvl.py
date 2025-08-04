@@ -15,14 +15,48 @@ GUILD_ID = os.getenv("GUILD_ID")
 
 
 def format_tvl(tvl: float) -> str:
-    if tvl >= 1_000_000:
-        return f"${tvl / 1_000_000:.2f}M"
-    return f"${round(tvl, 2):,}"
+    # Always format in millions to match supply formatting
+    return f"${tvl / 1_000_000:.2f}M"
+
+
+def fetch_curve_pool_tvl():
+    """Fetch USDaf Curve pool TVL and return half to avoid double counting"""
+    try:
+        # Use httpx with SSL verification disabled to handle certificate issues
+        res = httpx.get(
+            "https://api.curve.finance/api/getPools/ethereum/factory-stable-ng",
+            verify=False,
+            timeout=30.0
+        )
+        data = res.json()
+        
+        # Find the USDaf pool (factory-stable-ng-516)
+        for pool in data['data']['poolData']:
+            if pool['id'] == 'factory-stable-ng-516':
+                # Return half the pool value to avoid double counting USDaf
+                return pool['usdTotal'] / 2
+        
+        return 0
+    except Exception:
+        return 0
 
 
 def fetch_usdaf_tvl():
-    res = httpx.get("https://api.llama.fi/tvl/asymmetry-usdaf")
-    return res.json()
+    """Fetch total USDaf TVL from DeFiLlama + Curve pool"""
+    try:
+        # Get main TVL from DeFiLlama
+        res = httpx.get("https://api.llama.fi/tvl/asymmetry-usdaf")
+        main_tvl = res.json()
+        
+        # Get Curve pool TVL (half value to avoid double counting)
+        curve_tvl = fetch_curve_pool_tvl()
+        
+        # Return combined TVL
+        total_tvl = main_tvl + curve_tvl
+        return total_tvl
+    except Exception:
+        # Fallback to just Curve pool if main TVL fails
+        return fetch_curve_pool_tvl()
 
 
 async def send_update(bot: hikari.GatewayBot):
