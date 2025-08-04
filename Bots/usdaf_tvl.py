@@ -42,16 +42,17 @@ def fetch_curve_pool_tvl():
 
 
 def fetch_usdaf_tvl():
-    """Fetch USDaf TVL from DeFiLlama only (excluding Curve pool)"""
+    """Fetch USDaf TVL from Asymmetry Finance API"""
     try:
-        # Get main TVL from DeFiLlama
-        res = httpx.get("https://api.llama.fi/tvl/asymmetry-usdaf")
-        main_tvl = res.json()
+        # Get TVL from Asymmetry Finance API
+        res = httpx.get("https://asymmetryfinance.github.io/api.usdafv2/docs/v2/mainnet.json")
+        data = res.json()
         
-        # Return only the main TVL (excluding Curve pool)
-        return main_tvl
+        # Extract total_value_locked and convert to float
+        total_value_locked = float(data["total_value_locked"])
+        return total_value_locked
     except Exception:
-        # Return 0 if main TVL fails (no longer falling back to Curve pool)
+        # Return 0 if API call fails
         return 0
 
 
