@@ -49,7 +49,7 @@ def fetch_usdaf_tvl():
         data = res.json()
         
         # Extract total_value_locked and convert to float
-        total_value_locked = float(data["total_value_locked"])
+        total_value_locked = float(data["total_coll_value"])
         return total_value_locked
     except Exception:
         # Return 0 if API call fails
