@@ -38,13 +38,6 @@ async def run():
 
     @bot.listen()
     async def on_ready(event: hikari.ShardReadyEvent):
-        # Set the activity after the bot is ready
-        await bot.update_presence(
-            activity=hikari.Activity(
-                name="Total Asymmetry TVL",
-                type=hikari.ActivityType.WATCHING,
-            ),
-        )
         while True:
             try:
                 await send_update(bot)
@@ -55,7 +48,12 @@ async def run():
                 await asyncio.sleep(60)
 
     try:
-        await bot.start()
+        await bot.start(
+            activity=hikari.Activity(
+                name="ASF TVL",
+                type=hikari.ActivityType.WATCHING,
+            ),
+        )
         await bot.join()
     finally:
         await bot.close()
