@@ -50,7 +50,7 @@ async def run():
     try:
         await bot.start(
             activity=hikari.Activity(
-                name="ASF TVL",
+                name="Asymmetry TVL",
                 type=hikari.ActivityType.WATCHING,
             ),
         )
