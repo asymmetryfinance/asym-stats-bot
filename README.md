@@ -16,7 +16,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 
 You will also need:
 
-- 4x Discord bot token (setup 4 bots in Discord dev portal)
+- Discord bot tokens (setup bots in Discord dev portal)
 - Guild ID (aka server ID)
 - HTTP RPC URL for Ethereum Mainnet
 

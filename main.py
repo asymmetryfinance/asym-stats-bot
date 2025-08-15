@@ -3,13 +3,19 @@ import asyncio
 from rich import print
 from rich.traceback import install
 
-from Bots import asf_price, global_tvl, usdaf_supply, usdaf_tvl
+from Bots import asf_mcap, asf_price, global_tvl, usdaf_supply, usdaf_tvl
 
 install()
 
 
 async def main():
-    tasks = [asf_price.run(), usdaf_supply.run(), usdaf_tvl.run(), global_tvl.run()]
+    tasks = [
+        asf_price.run(),
+        usdaf_supply.run(),
+        usdaf_tvl.run(),
+        global_tvl.run(),
+        asf_mcap.run(),
+    ]
     try:
         await asyncio.gather(*tasks)
     except KeyboardInterrupt:
