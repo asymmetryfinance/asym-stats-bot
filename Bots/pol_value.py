@@ -36,7 +36,7 @@ def fetch_cvx_value():
     )
     vlcvx_contract = w3.eth.contract(
         address="0x72a19342e8F1838460eBFCCEf09F6585e32db86E",
-        abi="""[{"inputs":[{"internalType":"address","name":"_user","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"stateMutability":"view","type":"function"}]""",
+        abi="""[{"inputs":[{"internalType":"address","name":"_user","type":"address"}],"name":"lockedBalanceOf","outputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"stateMutability":"view","type":"function"}]""",
     )
 
     cvx_price = fetch_price("convex-finance", "4h")
