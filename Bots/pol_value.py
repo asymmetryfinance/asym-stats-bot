@@ -44,7 +44,7 @@ def fetch_cvx_value():
     unstaked_cvx_amount = cvx_contract.functions.balanceOf(POL_ADDRESS).call()
     unstaked_cvx_value: float = (unstaked_cvx_amount / 10**18) * cvx_price
 
-    vlcvx_amount = vlcvx_contract.functions.balanceOf(POL_ADDRESS).call()
+    vlcvx_amount = vlcvx_contract.functions.lockedBalanceOf(POL_ADDRESS).call()
     vlcvx_value: float = (vlcvx_amount / 10**18) * cvx_price
 
     total_cvx_value: float = unstaked_cvx_value + vlcvx_value
