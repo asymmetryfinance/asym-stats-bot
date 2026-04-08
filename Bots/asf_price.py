@@ -26,7 +26,7 @@ def fetch_asf_price(search_width: str = "4h"):
 async def send_update(bot: hikari.GatewayBot):
     price = fetch_asf_price()
     await bot.rest.edit_my_member(GUILD_ID, nickname=price)
-    await asyncio.sleep(60)
+    await asyncio.sleep(300)
 
 
 async def run():

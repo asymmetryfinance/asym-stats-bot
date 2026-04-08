@@ -45,7 +45,7 @@ async def send_update(bot: hikari.GatewayBot):
     #         type=hikari.ActivityType.WATCHING,
     #     ),
     # )
-    await asyncio.sleep(60)
+    await asyncio.sleep(300)
 
 
 async def run():

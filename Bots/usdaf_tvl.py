@@ -60,7 +60,7 @@ async def send_update(bot: hikari.GatewayBot):
     tvl = fetch_usdaf_tvl()
     formatted_tvl = format_tvl(tvl)
     await bot.rest.edit_my_member(GUILD_ID, nickname=formatted_tvl)
-    await asyncio.sleep(60)
+    await asyncio.sleep(300)
 
 
 async def run():

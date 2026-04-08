@@ -37,7 +37,7 @@ def fetch_asf_mcap():
 async def send_update(bot: hikari.GatewayBot):
     mcap = fetch_asf_mcap()
     await bot.rest.edit_my_member(GUILD_ID, nickname=mcap)
-    await asyncio.sleep(60)
+    await asyncio.sleep(300)
 
 
 async def run():

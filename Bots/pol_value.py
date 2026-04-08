@@ -72,7 +72,7 @@ def total_pol_value() -> str:
 async def send_update(bot: hikari.GatewayBot):
     total_value = total_pol_value()
     await bot.rest.edit_my_member(GUILD_ID, nickname=total_value)
-    await asyncio.sleep(60)
+    await asyncio.sleep(300)
 
 
 async def run():
